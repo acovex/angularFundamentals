@@ -9,11 +9,20 @@ import { Stock } from '../../models/stock.model';
 export class StockItemComponent implements OnInit {
 
   public stock: Stock;
+  public stockClasses: { [key: string]: any };
 
   constructor() { }
 
   ngOnInit() {
     this.stock = new Stock('Test Stock Company', 'TSC', 85, 80);
+    const diff = (this.stock.price / this.stock.previousPrice) - 1;
+    const largeChange = Math.abs(diff) > 0.01;
+    this.stockClasses = {
+      positive: this.stock.isPositiveChange(),
+      negative: !this.stock.isPositiveChange(),
+      'large-change': largeChange,
+      'small-change': !largeChange
+    };
   }
 
   public toggleFavorite(event: MouseEvent) {
