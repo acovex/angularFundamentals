@@ -1,5 +1,5 @@
 <div class="stock-container">
-  <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
+  <div class="name" style="font-weight: bold;" [ngStyle]="stockStyles">{{stock.name + ' (' + stock.code + ')'}}</div>
   <div class="price" [ngClass]="stockClasses">
     {{stock.price}} €
   </div>
