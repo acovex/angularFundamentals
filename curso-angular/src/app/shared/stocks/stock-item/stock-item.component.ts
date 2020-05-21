@@ -10,7 +10,7 @@ export class StockItemComponent implements OnInit {
 
   public stock: Stock;
   public stockClasses: { [key: string]: any };
-
+  public stockStyles: { [key: string]: string };
   constructor() { }
 
   ngOnInit() {
@@ -22,6 +22,10 @@ export class StockItemComponent implements OnInit {
       negative: !this.stock.isPositiveChange(),
       'large-change': largeChange,
       'small-change': !largeChange
+    };
+    this.stockStyles = {
+      color: this.stock.isPositiveChange() ? 'green' : 'red',
+      'font-size': largeChange ? '1.2em' : '0.8em'
     };
   }
 
