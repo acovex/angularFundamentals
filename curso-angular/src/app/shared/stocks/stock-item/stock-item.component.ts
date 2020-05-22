@@ -29,6 +29,7 @@ export class StockItemComponent implements OnInit, OnChanges,
   }
 
   ngOnInit() {
+    console.log('Stock Item Component - On Init');
   }
 
   public toogleFavoriteView(event: MouseEvent) {
