@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Stock } from '../../models/stock.model';
 
 @Component({
@@ -8,24 +8,18 @@ import { Stock } from '../../models/stock.model';
 })
 export class StockItemComponent implements OnInit {
 
-  public stocks: Stock[];
-  constructor() { }
+  @Input() stock: Stock;
+  @Output() private toggleFavorite: EventEmitter<Stock>;
+
+  constructor() {
+    this.toggleFavorite = new EventEmitter<Stock>();
+  }
 
   ngOnInit() {
-    this.stocks = [
-      new Stock('Test Stock Company', 'TSC', 85, 80),
-      new Stock('Second Stock Company', 'SSC', 10, 20),
-      new Stock('Third Stock Company', 'LSD', 15, 30),
-      new Stock('Last Stock Company', 'LSC', 876, 765)
-    ];
   }
 
-  public toggleFavorite(event: MouseEvent, indexSelected: number) {
-    console.log('Cambiando el el estado del stock', event);
-    this.stocks[indexSelected].favorite = !this.stocks[indexSelected].favorite;
+  public toogleFavoriteView(event: MouseEvent) {
+    this.toggleFavorite.emit(this.stock);
   }
 
-  public trackStockByCode(index: number, stock: Stock): string {
-    return stock.code;
-  }
 }
