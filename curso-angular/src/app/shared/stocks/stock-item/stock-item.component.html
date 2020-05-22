@@ -3,7 +3,7 @@
   <div class="price" [class]="stock.isPositiveChange() ? 'positive' : 'negative'">
     {{stock.price}} €
   </div>
-
   <button (click)="toogleFavoriteView($event)" [disabled]="stock.favorite">Añadir a favorito</button>
-
+  <button (click)="changeStockPrice()">Cambiar precio</button>
 </div>
+
