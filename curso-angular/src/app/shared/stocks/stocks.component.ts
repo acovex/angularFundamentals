@@ -9,11 +9,13 @@ import { Stock } from '../models/stock.model';
 export class StocksComponent implements OnInit {
   public title: string;
   public stock: Stock;
+  public visible: boolean;
   private counter: number;
 
   constructor(private cdr: ChangeDetectorRef) {
     this.title = 'Stock Market App';
     this.counter = 1;
+    this.visible = true;
   }
 
   ngOnInit(): void {
@@ -49,5 +51,11 @@ export class StocksComponent implements OnInit {
     }
   }
 
+  destroyElement() {
+    this.visible = false;
+    setTimeout(() => {
+      this.visible = true;
+    }, 100);
+  }
 
 }
