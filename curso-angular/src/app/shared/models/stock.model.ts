@@ -1,7 +1,7 @@
 export class Stock {
 
   public favorite: boolean;
-  constructor(public name: string, public code: string, public price: number, public previousPrice: number) {
+  constructor(public name: string, public code: string, public price: number, public previousPrice: number, public exchange?: string) {
     this.favorite = false;
   }
   public isPositiveChange(): boolean {

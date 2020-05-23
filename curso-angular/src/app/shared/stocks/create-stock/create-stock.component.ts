@@ -9,12 +9,24 @@ import { Stock } from '../../models/stock.model';
 export class CreateStockComponent implements OnInit {
 
   public stock: Stock;
-
+  public confirmed: boolean;
   constructor() {
-    this.stock = new Stock('test', '', 0, 0);
+    this.confirmed = false;
+    this.stock = new Stock('test', '', 0, 0, 'NASDAQ');
   }
 
   ngOnInit() {
+  }
+
+  public setStockPrice(price: number) {
+    if (price !== this.stock.price) {
+      this.stock.previousPrice = this.stock.price;
+    }
+    this.stock.price = price;
+  }
+
+  public createStock() {
+    console.log('Creando stock ', this.stock);
   }
 
 }
