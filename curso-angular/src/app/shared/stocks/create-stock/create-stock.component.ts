@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { StockService } from './../../services/stock/stock.service';
+import { Component, OnInit, Injector } from '@angular/core';
 import { Stock } from '../../models/stock.model';
 import { Form, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-stock',
@@ -12,8 +14,9 @@ export class CreateStockComponent implements OnInit {
   public stock: Stock;
   public confirmed: boolean;
   public exchanges: string[];
+  public message: string;
 
-  constructor() {
+  constructor(private stockService: StockService) {
     this.confirmed = false;
     this.exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
     this.stock = new Stock('test', '', 0, 0, 'NASDAQ');
@@ -30,11 +33,14 @@ export class CreateStockComponent implements OnInit {
   }
 
   public createStock(stockForm: NgForm) {
-    console.log('Stock form', stockForm);
-    if (stockForm.valid) {
-      console.log('Creando stock ', this.stock);
+    const created = this.stockService.createStock(this.stock);
+    if (created) {
+      this.message = 'Stock creado con éxito con el código: '
+        + this.stock.code;
+      this.stock = new Stock('', '', 0, 0, 'NASDAQ');
     } else {
-      console.error('Stock form esta en estado no valido');
+      this.message = 'Stock con el código: ' + this.stock.code
+        + ' ya existe';
     }
   }
 }

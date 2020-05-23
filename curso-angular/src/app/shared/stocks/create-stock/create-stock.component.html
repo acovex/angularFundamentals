@@ -1,4 +1,5 @@
 <h2>Formulario de creación de stock</h2>
+<div *ngIf="message">{{message}}</div>
 <div class="form-group">
   <form (ngSubmit)="createStock(stockForm)" #stockForm="ngForm">
     <div class="stock-name">
@@ -43,5 +44,3 @@
     <button type="submit" [disabled]="stockForm.invalid">Create</button>
   </form>
 </div>
-<h4>Objeto stock {{stock | json}}</h4>
-<h4>El stock ha sido confirmado: {{confirmed}}</h4>
