@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Stock } from '../models/stock.model';
+import { StockService } from '../services/stock/stock.service';
 
 @Component({
   selector: 'app-stocks',
@@ -8,21 +9,17 @@ import { Stock } from '../models/stock.model';
 })
 export class StocksComponent implements OnInit {
   public title: string;
-  public stock: Stock;
-  private counter: number;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    this.title = 'Stock Market App';
-    this.counter = 1;
+  public stocks: Stock[];
+  constructor(private stockService: StockService) { }
+
+  ngOnInit() {
+    this.stocks = this.stockService.getStocks();
   }
 
-  ngOnInit(): void {
-    this.stock = new Stock('Test Stock Company - ' + this.counter++,
-      'TSC', 85, 80);
-  }
-
-  onToggleFavorite(stock: Stock) {
-    this.stock.favorite = !this.stock.favorite;
+  public onToggleFavorite(stock: Stock) {
+    console.log('Favorite for stock ', stock, ' was triggered');
+    this.stockService.toggleFavorite(stock);
   }
 
 
