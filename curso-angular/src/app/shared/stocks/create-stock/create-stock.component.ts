@@ -1,8 +1,8 @@
 import { StockService } from './../../services/stock/stock.service';
-import { Component, OnInit, Injector, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Stock } from '../../models/stock.model';
-import { Form, NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,15 +12,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CreateStockComponent implements OnInit {
 
-  @Output() private refreshList: EventEmitter<void>;
-
   public stock: Stock;
   public confirmed: boolean;
   public exchanges: string[];
   public message: string;
 
-  constructor(private stockService: StockService) {
-    this.refreshList = new EventEmitter<void>();
+  constructor(private stockService: StockService, private router: Router) {
     this.confirmed = false;
     this.exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
     this.initializeStock();
@@ -52,7 +49,7 @@ export class CreateStockComponent implements OnInit {
       .subscribe((result: any) => {
         this.message = result.msg;
         this.initializeStock();
-        this.refreshList.emit();
+        this.router.navigate(['stocks', 'list']);
       }, (err) => {
         this.message = err.error.msg;
       });

@@ -1,26 +1,5 @@
 <section>
   <h1>{{title}}</h1>
-  <app-stock-item *ngFor="let stock of stocks$ | async" [stock]="stock" (refreshList)="refresh()">
-  </app-stock-item>
-  <app-create-stock (refreshList)="refresh()"></app-create-stock>
-</section>
-
-<section>
-  <h1>Prueba de Pipes</h1>
-  <div>Fecha - {{date | date: 'dd/MM/yyyy'}}</div>
-  <div>Número decimal - {{decimalNumber |  number:'1.3-3' }}, {{decimalNumber |  number:'1.3-3' : 'en' }}</div>
-  <div>Número dinero - {{currencyNumber |  currency:'EUR' }}, {{currencyNumber |  currency:'CAD' }}</div>
-</section>
-
-<section>
-  <h1>Favoritos</h1>
-  <app-stock-item *ngFor="let stock of stocks$ | async | stockFavourite" [stock]="stock" (refreshList)="refresh()">
-  </app-stock-item>
-</section>
-
-<section>
-  <h1>No favoritos</h1>
-  <app-stock-item *ngFor="let stock of stocks$ | async | stockFavourite: false" [stock]="stock"
-    (refreshList)="refresh()">
+  <app-stock-item *ngFor="let stock of stocks$ | async" [stock]="stock">
   </app-stock-item>
 </section>

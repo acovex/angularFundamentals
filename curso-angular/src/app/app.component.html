@@ -1,4 +1,17 @@
-<div style="text-align:center">
-  <app-stocks></app-stocks>
+<!--<div>
+  <span class="m-r-20"><a href="/stocks/list">Lista stock</a></span>
+  <span><a href="/stocks/create">Crear stock</a></span>
+</div>-->
+<div class="links">
+  <span>
+    <a routerLink="/stocks/list" routerLinkActive="active">
+      Stock List
+    </a>
+  </span>
+  <span>
+    <a routerLink="/stocks/create" routerLinkActive="active">
+      Create Stock
+    </a>
+  </span>
 </div>
 <router-outlet></router-outlet>
