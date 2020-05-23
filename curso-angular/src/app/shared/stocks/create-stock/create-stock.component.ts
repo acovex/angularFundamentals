@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stock } from '../../models/stock.model';
+import { Form, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-stock',
@@ -28,8 +29,12 @@ export class CreateStockComponent implements OnInit {
     this.stock.price = price;
   }
 
-  public createStock() {
-    console.log('Creando stock ', this.stock);
+  public createStock(stockForm: NgForm) {
+    console.log('Stock form', stockForm);
+    if (stockForm.valid) {
+      console.log('Creando stock ', this.stock);
+    } else {
+      console.error('Stock form esta en estado no valido');
+    }
   }
-
 }
