@@ -10,8 +10,11 @@ export class CreateStockComponent implements OnInit {
 
   public stock: Stock;
   public confirmed: boolean;
+  public exchanges: string[];
+
   constructor() {
     this.confirmed = false;
+    this.exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
     this.stock = new Stock('test', '', 0, 0, 'NASDAQ');
   }
 
