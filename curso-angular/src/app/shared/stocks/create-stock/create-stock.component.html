@@ -40,7 +40,7 @@
       <input type="checkbox" name="stockConfirm" required [(ngModel)]="confirmed">
       Confirmo que la información es veraz
     </div>
-    <button type="submit">Create</button>
+    <button type="submit" [disabled]="stockForm.invalid">Create</button>
   </form>
 </div>
 <h4>Objeto stock {{stock | json}}</h4>
