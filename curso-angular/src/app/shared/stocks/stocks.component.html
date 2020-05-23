@@ -1,11 +1,6 @@
 <section>
   <h1>{{title}}</h1>
-  <app-stock-item [stock]="stock" (toggleFavorite)="onToggleFavorite($event)" *ngIf="visible">
-    <div>
-      <button (click)="changeStockObject()">Cambiar stock</button>
-      <button (click)="changeStockPrice()">Cambiar precio</button>
-      <button (click)="changeStockPrice(true)">Cambiar precio cambiando referencia</button>
-      <button (click)="destroyElement()">Destruir elemento</button>
-    </div>
+  <app-stock-item [stock]="stock" (toggleFavorite)="onToggleFavorite($event)">
   </app-stock-item>
+  <app-create-stock></app-create-stock>
 </section>
