@@ -1,25 +1,33 @@
-<h2>Formulario stock</h2>
+<h2>Formulario de creación de stock</h2>
 <div class="form-group">
-  <form (ngSubmit)="createStock()">
-    <div>
-      El elemento cambiará de verde a rojo cuando sea invalido
-    </div>
+  <form (ngSubmit)="createStock(stockForm)" #stockForm="ngForm">
     <div class="stock-name">
-      <input type="text" placeholder="Stock Name" required name="stockName" [(ngModel)]="stock.name">
+      <input type="text" placeholder="Nombre stock" required name="stockName" #stockName="ngModel"
+        [(ngModel)]="stock.name">
     </div>
-    <div>
-      El elemento cambiará de verde a rojo cuando se haya modificado
+    <div *ngIf="stockName.errors && stockName.errors.required">
+      El nombre del stock es requerido
     </div>
     <div class="stock-code">
-      <input type="text" placeholder="Stock Code" name="stockCode" [(ngModel)]="stock.code">
+      <input type="text" placeholder="Código stock" required minlength="2" name="stockCode" #stockCode="ngModel"
+        [(ngModel)]="stock.code">
     </div>
-    El elemento cambiarña de verde a rojo cuando el usuario haya influido en el (independientemente de si se cambia o
-    no)
-    <div>
+    <div *ngIf="stockCode.dirty && stockCode.invalid">
+      <div *ngIf="stockCode.errors.required">
+        El código del stock es requerido
+      </div>
+      <div *ngIf="stockCode.errors.minlength">
+       El código del stock tiene que tener al menos longitud de 2
+      </div>
     </div>
     <div class="stock-price">
-      <input type="number" placeholder="Stock Price" name="stockPrice" [ngModel]="stock.price"
-        (ngModelChange)="setStockPrice($event)">
+      <input type="number" placeholder="Stock Price" name="stockPrice" required #stockPrice="ngModel"
+        [ngModel]="stock.price" (ngModelChange)="setStockPrice($event)">
+    </div>
+    <div *ngIf="stockPrice.dirty && stockPrice.invalid">
+      <div *ngIf="stockPrice.errors.required">
+        El precio del stock es obligatorio
+      </div>
     </div>
     <div class="stock-exchange">
       <div>
@@ -29,11 +37,11 @@
       </div>
     </div>
     <div class="stock-confirm">
-      <input type="checkbox" name="stockConfirm" [(ngModel)]="confirmed">
-      Confirmo que la información proporcionada es veraz
+      <input type="checkbox" name="stockConfirm" required [(ngModel)]="confirmed">
+      Confirmo que la información es veraz
     </div>
-    <button [disabled]="!confirmed" type="submit">Crear</button>
+    <button type="submit">Create</button>
   </form>
 </div>
 <h4>Objeto stock {{stock | json}}</h4>
-<h4>Los datos de se han confirmado: {{confirmed}}</h4>
+<h4>El stock ha sido confirmado: {{confirmed}}</h4>
