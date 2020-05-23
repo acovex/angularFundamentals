@@ -1,10 +1,32 @@
 <h2>Stock Formulario creación</h2>
 <div class="form-group">
-  <form>
+  <form (ngSubmit)="createStock()">
     <div class="stock-name">
-      <input type="text" placeholder="Stock Name" name="stockName" [(ngModel)]="stock.name">
+      <input type="text" placeholder="Nombre stock" name="stockName" [(ngModel)]="stock.name">
     </div>
+    <div class="stock-code">
+      <input type="text" placeholder="Código stock" name="stockCode" [(ngModel)]="stock.code">
+    </div>
+    <div class="stock-code">
+      <input type="number" placeholder="Precio stock" name="stockPrice" [ngModel]="stock.price"
+        (ngModelChange)="setStockPrice($event)">
+    </div>
+    <div class="stock-exchange">
+      <div>
+        <input type="radio" name="stockExchange" [(ngModel)]="stock.exchange" value="NYSE">NYSE
+      </div>
+      <div>
+        <input type="radio" name="stockExchange" [(ngModel)]="stock.exchange" value="NASDAQ">NASDAQ
+      </div>
+      <div>
+        <input type="radio" name="stockExchange" [(ngModel)]="stock.exchange" value="OTHER">OTHER
+      </div>
+    </div>
+    <div class="stock-confirm">
+      <input type="checkbox" name="stockConfirm" [(ngModel)]="confirmed">
+      Acepto que la información proporcionada es veraz
+    </div>
+    <button [disabled]="!confirmed" type="submit">Crear stock</button>
   </form>
-  <button (click)="stock.name='test'">Reset nombre stock</button>
 </div>
-<h4>El nombre del stock es {{stock.name}}</h4>
+<h4>Objeto stock {{stock | json}}</h4>
