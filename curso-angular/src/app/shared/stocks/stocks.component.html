@@ -1,6 +1,6 @@
 <section>
   <h1>{{title}}</h1>
-  <app-stock-item *ngFor="let stock of stocks" [stock]="stock" (toggleFavorite)="onToggleFavorite($event)">
+  <app-stock-item *ngFor="let stock of stocks$ | async" [stock]="stock">
   </app-stock-item>
-  <app-create-stock></app-create-stock>
+  <app-create-stock (refreshList)="refresh()"></app-create-stock>
 </section>
