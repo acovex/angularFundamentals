@@ -2,8 +2,7 @@
 <div class="form-group">
   <form>
     <div class="stock-name">
-      <input type="text" placeholder="Stock Name" name="stockName" [ngModel]="stock.name"
-        (ngModelChange)="stock.name=$event">
+      <input type="text" placeholder="Stock Name" name="stockName" [(ngModel)]="stock.name">
     </div>
   </form>
   <button (click)="stock.name='test'">Reset nombre stock</button>
