@@ -9,4 +9,6 @@ app.get('/api/fail', (req, res) => res.status(403).json({msg: 'You are not allow
 
 app.use('/api/stock', require('./stocks'));
 
+app.use('/api/product', require('./products'));
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'));

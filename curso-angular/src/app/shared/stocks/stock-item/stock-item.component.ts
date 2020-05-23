@@ -5,8 +5,10 @@ import {
   AfterContentInit,
   AfterViewChecked,
   AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Stock } from '../../models/stock.model';
+import { StockService } from '../../services/stock/stock.service';
 
 @Component({
   selector: 'app-stock-item',
@@ -14,25 +16,22 @@ import { Stock } from '../../models/stock.model';
   styleUrls: ['./stock-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StockItemComponent implements OnInit{
+export class StockItemComponent implements OnInit {
 
   @Input() stock: Stock;
-  @Output() private toggleFavorite: EventEmitter<Stock>;
 
-  constructor() {
-    this.toggleFavorite = new EventEmitter<Stock>();
-  }
+  constructor(private stockService: StockService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    console.log('Stock Item Component - On Init');
+
   }
 
-  public toogleFavoriteView(event: MouseEvent) {
-    this.toggleFavorite.emit(this.stock);
-  }
-
-  public changeStockPrice() {
-    this.stock.price += 5;
+  onToggleFavorite(event: MouseEvent) {
+    this.stockService.toggleFavorite(this.stock)
+      .subscribe((stock) => {
+        this.stock.favorite = !this.stock.favorite;
+        this.cdr.detectChanges();
+      });
   }
 
 

@@ -1,8 +1,9 @@
 import { StockService } from './../../services/stock/stock.service';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Output, EventEmitter } from '@angular/core';
 import { Stock } from '../../models/stock.model';
 import { Form, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-create-stock',
@@ -11,18 +12,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CreateStockComponent implements OnInit {
 
+  @Output() private refreshList: EventEmitter<void>;
+
   public stock: Stock;
   public confirmed: boolean;
   public exchanges: string[];
   public message: string;
 
   constructor(private stockService: StockService) {
+    this.refreshList = new EventEmitter<void>();
     this.confirmed = false;
     this.exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
-    this.stock = new Stock('test', '', 0, 0, 'NASDAQ');
+    this.initializeStock();
   }
 
   ngOnInit() {
+  }
+
+  private initializeStock() {
+    this.stock = {
+      name: '',
+      code: '',
+      price: 0,
+      previousPrice: 0,
+      exchange: 'NASDAQ',
+      favorite: false
+    };
   }
 
   public setStockPrice(price: number) {
@@ -33,14 +48,14 @@ export class CreateStockComponent implements OnInit {
   }
 
   public createStock(stockForm: NgForm) {
-    const created = this.stockService.createStock(this.stock);
-    if (created) {
-      this.message = 'Stock creado con éxito con el código: '
-        + this.stock.code;
-      this.stock = new Stock('', '', 0, 0, 'NASDAQ');
-    } else {
-      this.message = 'Stock con el código: ' + this.stock.code
-        + ' ya existe';
-    }
+    this.stockService.createStock(this.stock)
+      .subscribe((result: any) => {
+        this.message = result.msg;
+        this.initializeStock();
+        this.refreshList.emit();
+      }, (err) => {
+        this.message = err.error.msg;
+      });
   }
+
 }
