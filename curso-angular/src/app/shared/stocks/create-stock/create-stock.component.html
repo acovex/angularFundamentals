@@ -1,27 +1,39 @@
-<h2>Stock Formulario creación</h2>
+<h2>Formulario stock</h2>
 <div class="form-group">
   <form (ngSubmit)="createStock()">
+    <div>
+      El elemento cambiará de verde a rojo cuando sea invalido
+    </div>
     <div class="stock-name">
-      <input type="text" placeholder="Nombre stock" name="stockName" [(ngModel)]="stock.name">
+      <input type="text" placeholder="Stock Name" required name="stockName" [(ngModel)]="stock.name">
+    </div>
+    <div>
+      El elemento cambiará de verde a rojo cuando se haya modificado
     </div>
     <div class="stock-code">
-      <input type="text" placeholder="Código stock" name="stockCode" [(ngModel)]="stock.code">
+      <input type="text" placeholder="Stock Code" name="stockCode" [(ngModel)]="stock.code">
     </div>
-    <div class="stock-code">
-      <input type="number" placeholder="Precio stock" name="stockPrice" [ngModel]="stock.price"
+    El elemento cambiarña de verde a rojo cuando el usuario haya influido en el (independientemente de si se cambia o
+    no)
+    <div>
+    </div>
+    <div class="stock-price">
+      <input type="number" placeholder="Stock Price" name="stockPrice" [ngModel]="stock.price"
         (ngModelChange)="setStockPrice($event)">
     </div>
     <div class="stock-exchange">
-      <select name="stockExchange" [(ngModel)]="stock.exchange">
-        <option *ngFor="let exchange of exchanges"
-        [ngValue]="exchange">{{exchange}}</option>
+      <div>
+        <select name="stockExchange" [(ngModel)]="stock.exchange">
+          <option *ngFor="let exchange of exchanges" [ngValue]="exchange">{{exchange}}</option>
         </select>
+      </div>
     </div>
     <div class="stock-confirm">
       <input type="checkbox" name="stockConfirm" [(ngModel)]="confirmed">
-      Acepto que la información proporcionada es veraz
+      Confirmo que la información proporcionada es veraz
     </div>
-    <button [disabled]="!confirmed" type="submit">Crear stock</button>
+    <button [disabled]="!confirmed" type="submit">Crear</button>
   </form>
 </div>
 <h4>Objeto stock {{stock | json}}</h4>
+<h4>Los datos de se han confirmado: {{confirmed}}</h4>
