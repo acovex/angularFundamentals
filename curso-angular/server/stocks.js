@@ -22,10 +22,10 @@ router.post('/', (req, res) => {
   let foundStock = stocks.find(each => each.code === stock.code);
   if (foundStock) {
     return res.status(400)
-        .json({msg: 'Stock with code ' + stock.code + ' already exists'});
+        .json({msg: 'El stock con el código ' + stock.code + ' ya existe'});
   }
   stocks.push(stock);
-  return res.status(200).json({msg: 'Stock with code ' + stock.code + ' successfully created'});
+  return res.status(200).json({msg: 'El stock con el código ' + stock.code + ' se ha creado correctamente'});
 });
 
 router.patch('/:code', (req, res) => {
@@ -33,11 +33,11 @@ router.patch('/:code', (req, res) => {
   let foundStock = stocks.find(each => each.code === stockCode);
   if (foundStock) {
     foundStock.favorite = req.body.favorite;
-    let msg = 'Stock with code ' + stockCode + ' is now ';
-    msg += foundStock.favorite ? ' favorited.' : ' unfavorited';
+    let msg = 'El stock con el codigo ' + stockCode + 'ahora es ';
+    msg += foundStock.favorite ? ' favorito.' : ' no favorito';
     return res.status(200).json({msg: msg});
   }
-  return res.status(400).json({msg: 'Stock with code ' + stockCode + ' not found!'});
+  return res.status(400).json({msg: 'Stock con el código ' + stockCode + ' no encontrado!'});
 });
 
 module.exports = router;

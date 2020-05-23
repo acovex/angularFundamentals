@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 
   if (product.id) {
     return res.status(400)
-        .json({msg: 'Product seems to already have an id assigned'});
+        .json({msg: 'El producto parece que ya tiene un id asignado'});
   }
 
   product.id = products.length + 1;
@@ -58,9 +58,9 @@ router.patch('/:id', (req, res) => {
   if (foundProduct) {
     let changeInQuantity = req.body.changeInQuantity;
     foundProduct.quantityInCart += changeInQuantity;
-    return res.status(200).json({msg: 'Successfully updated cart'});
+    return res.status(200).json({msg: 'Producto actualizado correctamente'});
   }
-  return res.status(400).json({msg: 'Product with id ' + productId + ' not found.'});
+  return res.status(400).json({msg: 'Producto con id ' + productId + 'no encontrado.'});
 });
 
 module.exports = router;
