@@ -7,10 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { StockService } from './services/stock/stock.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StockFavouritePipe } from './pipes/stock-favourite/stock-favourite.pipe';
+import { PriceNumberPipe } from './pipes/price-number.pipe';
 
 
 @NgModule({
-  declarations: [StocksComponent, StockItemComponent, CreateStockComponent, StockFavouritePipe],
+  declarations: [StocksComponent, StockItemComponent, CreateStockComponent, StockFavouritePipe, PriceNumberPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,6 +20,6 @@ import { StockFavouritePipe } from './pipes/stock-favourite/stock-favourite.pipe
   exports: [
     StocksComponent
   ],
-  providers: [StockService, DecimalPipe, DatePipe, CurrencyPipe, StockFavouritePipe]
+  providers: [StockService, DecimalPipe, DatePipe, CurrencyPipe, StockFavouritePipe, PriceNumberPipe]
 })
 export class SharedModule { }

@@ -12,12 +12,12 @@ export class StocksComponent implements OnInit {
   public title: string;
   public stocks$: Observable<Stock[]>;
 
-  public date: Date;
+  public date: string;
   public decimalNumber: number;
   public currencyNumber: number;
 
   constructor(private stockService: StockService) {
-    this.date = new Date();
+    this.date = new Date().toISOString();
     this.decimalNumber = 1231.4785;
     this.currencyNumber = 14.78;
   }
