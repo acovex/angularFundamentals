@@ -2,7 +2,7 @@
   <div class="name">{{product.name}}</div>
   <div class="price">{{product.price}} €</div>
   <img [src]="product.img" alt="Imagen" width="200" height="200">
-  <div>Cantidad - {{product.quantity}}</div>
+  <div>Cantidad - {{product.quantity}} Máx. {{product.numberStock}}</div>
   <button (click)="res()" [disabled]="product.quantity === 0">-</button>
   <button (click)="sum()" [disabled]="product.quantity >= product.numberStock">+</button>
 </div>
