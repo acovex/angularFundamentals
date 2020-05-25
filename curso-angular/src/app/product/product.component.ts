@@ -29,4 +29,12 @@ export class ProductComponent implements OnInit {
     this.products.splice(this.products.length - 1, 1);
   }
 
+  public sum(item: Product) {
+    item.quantity++;
+  }
+
+  public res(item: Product) {
+    item.quantity--;
+  }
+
 }
