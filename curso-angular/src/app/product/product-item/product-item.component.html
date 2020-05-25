@@ -1,8 +1,11 @@
-<div class="stock-container" [class]="product.isAvailable() ? 'available' : 'non-available'">
-  <div class="name">{{product.name}}</div>
+<div class="stock-container" [ngClass]="{
+      available: product.isAvailable(),
+      'non-available': !product.isAvailable()
+    }">
+  <div class="name">{{product.name}} -- {{product.code}}</div>
   <div class="price">{{product.price}} €</div>
   <img [src]="product.img" alt="Imagen" width="200" height="200">
   <div>Cantidad - {{product.quantity}} Máx. {{product.numberStock}}</div>
-  <button (click)="res()" [disabled]="product.quantity === 0">-</button>
-  <button (click)="sum()" [disabled]="product.quantity >= product.numberStock">+</button>
+  <button (click)="res()" *ngIf="product.quantity > 0">-</button>
+  <button (click)="sum()" *ngIf="product.quantity < product.numberStock">+</button>
 </div>

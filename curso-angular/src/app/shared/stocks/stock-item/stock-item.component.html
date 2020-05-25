@@ -1,5 +1,6 @@
-<div class="stock-container" *ngFor="let stock of stocks; index as i; even as e; odd as o; last as la; first as fi">
-  index - {{i}} | even - {{e}} |  odd - {{o}} | first - {{fi}} | last - {{la}}
+<div class="stock-container"
+  *ngFor="let stock of stocks; index as i; even as e; odd as o; last as la; first as fi">
+  index - {{i}} | even - {{e}} | odd - {{o}} | first - {{fi}} | last - {{la}}
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <div class="price" [class]="stock.isPositiveChange() ? 'positive' : 'negative'">
     {{stock.price}} €
@@ -7,12 +8,12 @@
   <button (click)="toggleFavorite($event, i)" [disabled]="stock.favorite">Añadir a favorito</button>
 </div>
 
-<div class="stock-container" *ngFor="let stock of stocks; index as i; even as e; odd as o; last as la; first as fi; trackBy: trackStockByCode">
-  index - {{i}} | even - {{e}} |  odd - {{o}} | first - {{fi}} | last - {{la}}
+<div class="stock-container"
+  *ngFor="let stock of stocks; index as i; even as e; odd as o; last as la; first as fi; trackBy: trackStockByCode">
+  index - {{i}} | even - {{e}} | odd - {{o}} | first - {{fi}} | last - {{la}}
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <div class="price" [class]="stock.isPositiveChange() ? 'positive' : 'negative'">
     {{stock.price}} €
   </div>
   <button (click)="toggleFavorite($event, i)" [disabled]="stock.favorite">Añadir a favorito</button>
 </div>
-

@@ -1,7 +1,7 @@
 export class Product {
   public quantity: number;
 
-  constructor(public name: string, public price: number, public img: string, public numberStock: number) {
+  constructor(public name: string, public price: number, public img: string, public numberStock: number, public code: number) {
     this.quantity = 0;
   }
 

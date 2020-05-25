@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/product.model';
 
 @Component({
@@ -8,18 +8,19 @@ import { Product } from '../models/product.model';
 })
 export class ProductItemComponent implements OnInit {
 
-  public product: Product;
-
-  constructor() { }
+  @Input() product: Product;
+  constructor() {
+  }
 
   ngOnInit() {
-    this.product = new Product('Producto estrella', 12, 'https://api.time.com/wp-content/uploads/2018/06/dinosaurs-jurassic-world-fact-check-3.jpg?w=800&quality=85', 5);
   }
 
-  sum() {
+
+  public sum() {
     this.product.quantity++;
   }
-  res() {
+
+  public res() {
     this.product.quantity--;
   }
 

@@ -1,4 +1,9 @@
 <h1>Productos</h1>
 <section>
-  <app-product-item></app-product-item>
+  <app-product-item *ngFor="let product of products; index as i;" [product]="product">
+  </app-product-item>
+</section>
+<section>
+  <button (click)="quitProd()" *ngIf="products.length  > 0">-</button>
+  <button (click)="addProd()" *ngIf="products.length  < maxNumber">+</button>
 </section>
